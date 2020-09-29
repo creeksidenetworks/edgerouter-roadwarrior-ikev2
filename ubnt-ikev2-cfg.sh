@@ -1,8 +1,7 @@
 #!/bin/bash
 
-echo -e " *** EdgeRouter/USG roadwarrior auto configurator *** "
-echo -e "       *** (c) Creekside Networks LLC 2020 *** \n"
-echo -e "                          ****** \n"
+echo -e "\n *** EdgeRouter/USG roadwarrior auto configurator *** "
+echo -e " ***      (c) Creekside Networks LLC 2020         *** \n"
 
 if [ "$1" != "" ]; then
   HOST=$1
@@ -12,7 +11,7 @@ fi
 
 IPADDRESS=$(host $HOST | grep -o "IPv4 address.*" | awk '{print $3}')
 
-while [$IPADDRESS == ""]
+while [[ $IPADDRESS == "" ]]
 do
     echo -e "\nCan not resolve server FQDN $HOST, retry..."
     read -p "    VPN Server's FQDN: " HOST
@@ -27,7 +26,7 @@ ORGANISATION="Creekside Customer"
 # find out default route interface
 IPSEC_INTF=$(ip -4 route | grep default | grep -o "dev.*" | awk '{print $2}') 
 
-echo -e "Summary of configurations"
+echo -e "\nSummary of configurations"
 echo -e "  VPN Server FQDN = ${HOST}"
 echo -e "  VPN Server IP   = ${IPADDRESS}"
 echo -e "  WAN interace    = ${IPSEC_INTF}"
