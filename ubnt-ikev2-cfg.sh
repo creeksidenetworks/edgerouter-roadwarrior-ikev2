@@ -1,20 +1,21 @@
 #!/bin/bash
 
 echo -e " *** EdgeRouter/USG roadwarrior auto configurator *** "
-echo -e " ***        (c) Creekside Networks LLC 2020       *** \n"
+echo -e "       *** (c) Creekside Networks LLC 2020 *** \n"
+echo -e "                          ****** \n"
 
 if [ "$1" != "" ]; then
   HOST=$1
 else
-  read -p "VPN Server's FQDN: " HOST
+  read -p "    VPN Server's FQDN: " HOST
 fi
 
 IPADDRESS=$(host $HOST | grep -o "IPv4 address.*" | awk '{print $3}')
 
 while [$IPADDRESS == ""]
 do
-    echo -e "\nCan not resolve server FQDN $HOST, retry...\n"
-    read -p "VPN Server's FQDN: " HOST
+    echo -e "\nCan not resolve server FQDN $HOST, retry..."
+    read -p "    VPN Server's FQDN: " HOST
     IPADDRESS=$(host $HOST | grep -o "IPv4 address.*" | awk '{print $3}')
 done
 
